@@ -31,4 +31,11 @@ public class AirlineController {
     
     }
 
+    @GetMapping("/city")
+    public List<Airline> findByCity(@RequestParam String city) {
+
+        return airlineRepository.findDistinctByAirplanesFlightsOriginAirportCityOrAirplanesFlightsDestinationAirportCity(city, city);
+        
+    }
+
 }

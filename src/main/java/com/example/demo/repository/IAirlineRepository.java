@@ -10,4 +10,6 @@ public interface IAirlineRepository extends JpaRepository<Airline, Long> {
 
     List<Airline> findDistinctByAirplanesFlightsOriginAirportNameAndAirplanesFlightsDestinationAirportName(String originName, String destinationName);
 
+        List<Airline> findDistinctByAirplanesFlightsOriginAirportCityOrAirplanesFlightsDestinationAirportCity(String originCity, String destinationCity);
+
 }
