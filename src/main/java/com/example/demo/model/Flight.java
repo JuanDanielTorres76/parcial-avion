@@ -39,7 +39,7 @@ public class Flight {
 
     private Timestamp arrivalDate;
 
-    private int estimatedPassengers;
+    private Integer estimatedPassengers;
 
     @ManyToOne
     @JoinColumn(name = "airplane_id", nullable = false)
@@ -49,7 +49,8 @@ public class Flight {
     @JoinColumn(name = "origin_airport_id", nullable = false)
     private Airport originAirport;
 
-    @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne
+    @JoinColumn(name = "destination_airport_id", nullable = false)
     private Airport destinationAirport;
     
     @JsonIgnore
