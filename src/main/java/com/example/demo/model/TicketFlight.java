@@ -25,7 +25,7 @@ public class TicketFlight {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
+
     private Long id;
 
     private Integer segmentOrder;
@@ -36,5 +36,5 @@ public class TicketFlight {
     
     @ManyToOne
     @JoinColumn(name = "flight_id", nullable = false)
-    private List<Flight> flight;
+    private Flight flight;
 }
