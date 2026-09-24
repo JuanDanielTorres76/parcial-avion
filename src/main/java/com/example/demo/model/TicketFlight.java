@@ -16,21 +16,25 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "ticket_flights")
 public class TicketFlight {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     private Long id;
 
     private Integer segmentOrder;
 
-    @JsonIgnore
-    @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "flight_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "ticket_id", nullable = false)
     private Ticket ticket;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ticket_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "flight_id", nullable = false)
     private List<Flight> flight;
 }
