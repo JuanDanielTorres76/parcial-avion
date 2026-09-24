@@ -11,10 +11,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,14 +37,17 @@ public class Ticket {
 
     private Timestamp purchaseDate;
 
-    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "destination_airport_id", nullable = false)
-    private Airport originAirport;
-    
-    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne
     @JoinColumn(name = "origin_airport_id", nullable = false)
+    private Airport originAirport;
+
+    @ManyToOne
+    @JoinColumn(name = "destination_airport_id", nullable = false)
     private Airport destinationAirport;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Ticket ticketFlights;
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "ticket")
+    private List<TicketFlight> ticketFlights = new ArrayList<>();
 }
